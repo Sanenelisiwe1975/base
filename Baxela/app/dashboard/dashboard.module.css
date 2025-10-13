@@ -31,17 +31,12 @@
   gap: 2rem;
 }
 
-.mapPlaceholder {
-  background-color: #fff;
+.mapContainer {
+  background-color: #e0e0e0;
   border-radius: 8px;
-  padding: 2rem;
-  text-align: center;
   border: 1px solid #ddd;
   height: 600px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .incidentList h2 {

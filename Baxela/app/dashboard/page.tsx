@@ -1,7 +1,14 @@
 "use client";
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import styles from './dashboard.module.css';
+
+// Dynamically import the Map component to ensure it's only rendered on the client side
+const Map = dynamic(() => import('./Map'), { 
+  ssr: false,
+  loading: () => <p>Loading map...</p>
+});
 
 const initialIncidents = [
   { id: 1, type: 'Vote Buying', severity: 4, location: { lat: 34.0522, lon: -118.2437 }, timestamp: new Date().toISOString(), verified: true, votes: 12 },
@@ -41,9 +48,8 @@ export default function Dashboard() {
       </header>
 
       <div className={styles.main}>
-        <div className={styles.mapPlaceholder}>
-          <h2>Live Incident Heatmap</h2>
-          <p>(Map component will be here)</p>
+        <div className={styles.mapContainer}>
+          <Map incidents={filteredIncidents} />
         </div>
 
         <div className={styles.incidentList}>

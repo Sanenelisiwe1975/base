@@ -1,94 +1,68 @@
 "use client";
-import { useState, useEffect } from 'react';
-import styles from "./page.module.css";
-import { Wallet } from "@coinbase/onchainkit/wallet";
+import { useState } from 'react';
+import Link from 'next/link';
+import styles from './page.module.css';
+import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit';
 
-export default function Home() {
-  const [description, setDescription] = useState('');
-  const [incidentType, setIncidentType] = useState('Vote Buying');
-  const [severity, setSeverity] = useState(1);
-  const [file, setFile] = useState(null);
-  const [location, setLocation] = useState(null);
-  const [timestamp, setTimestamp] = useState(null);
+export default function ReportPage() {
+  const [formData, setFormData] = useState({
+    type: 'Vote Buying',
+    severity: 3,
+    location: '',
+    description: '',
+  });
+  const [isVerified, setIsVerified] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    // Set timestamp when component mounts
-    setTimestamp(new Date().toISOString());
-
-    // Get GPS location automatically
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Error getting location: ", error);
-          alert("Could not retrieve location. Please ensure location services are enabled.");
-        }
-      );
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  }, []);
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleVerify = (result: ISuccessResult) => {
+    // In a real app, you'd want to send the proof to your backend for verification
+    console.log('World ID Verification Success:', result);
+    setIsVerified(true);
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // 1. (Simulated) Upload to IPFS/Arweave
-    // In a real app, you'd use a library like ipfs-http-client or web3.storage
-    const fileHash = file ? `0x...${file.name.substring(0, 8)}...hash` : null;
-    console.log("Simulated IPFS Hash:", fileHash);
-
-    const report = {
-      description,
-      incidentType,
-      severity,
-      location,
-      timestamp,
-      fileHash,
-    };
-
-    // 2. (Simulated) Record hash on Base
-    // In a real app, you'd use viem/ethers to call a smart contract function
-    console.log("Submitting report to blockchain:", report);
-    const transactionHash = `0x...transaction...hash`;
-    console.log("Simulated Transaction Hash:", transactionHash);
-
-    alert(`Incident reported! Transaction Hash: ${transactionHash}`);
+    if (!isVerified) {
+      alert('Please verify your identity with World ID before submitting.');
+      return;
+    }
+    console.log('Submitting incident report:', formData);
+    // Here you would typically send the data to a backend or smart contract
+    setIsSubmitted(true);
+    // Reset form after submission
+    setFormData({
+      type: 'Vote Buying',
+      severity: 3,
+      location: '',
+      description: '',
+    });
+    setIsVerified(false); // Require re-verification for new report
+    setTimeout(() => setIsSubmitted(false), 5000); // Reset submission status message
   };
 
   return (
     <div className={styles.container}>
-      <header className={styles.headerWrapper}>
-        <Wallet />
+      <header className={styles.header}>
+        <h1 className={styles.title}>Report an Incident</h1>
+        <Link href="/dashboard" className={styles.navLink}>View Dashboard &rarr;</Link>
       </header>
 
-      <div className={styles.content}>
-        <h1 className={styles.title}>Election Monitoring System</h1>
-        <Link href="/dashboard">View Transparency Dashboard &rarr;</Link>
-        <p>Report an incident to protect election integrity.</p>
-
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <div className={styles.formGroup}>
-            <label htmlFor="description">Incident Description</label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Describe what you witnessed..."
-              required
-            />
+      <main className={styles.main}>
+        {isSubmitted ? (
+          <div className={styles.successMessage}>
+            <h2>Thank you!</h2>
+            <p>Your incident report has been submitted for verification.</p>
+            <Link href="/dashboard">View it on the dashboard</Link>
           </div>
-
-          <div className={styles.formGroup}>
-            <label htmlFor="incidentType">Incident Type</label>
-            <select id="incidentType" value={incidentType} onChange={(e) => setIncidentType(e.target.value)}>
+        ) : (
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <label htmlFor="type">Incident Type</label>
+            <select id="type" name="type" value={formData.type} onChange={handleChange}>
               <option>Vote Buying</option>
               <option>Ballot Stuffing</option>
               <option>Intimidation</option>
@@ -96,39 +70,60 @@ export default function Home() {
               <option>Misinformation</option>
               <option>Other</option>
             </select>
-          </div>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="severity">Severity (1-5)</label>
-            <select id="severity" value={severity} onChange={(e) => setSeverity(Number(e.target.value))}>
-              <option value={1}>1 - Low</option>
-              <option value={2}>2</option>
-              <option value={3}>3 - Medium</option>
-              <option value={4}>4</option>
-              <option value={5}>5 - High</option>
-            </select>
-          </div>
+            <label htmlFor="severity">Perceived Severity (1-5)</label>
+            <input
+              type="range"
+              id="severity"
+              name="severity"
+              min="1"
+              max="5"
+              value={formData.severity}
+              onChange={handleChange}
+            />
+            <span>{formData.severity}</span>
 
-          <div className={styles.formGroup}>
-            <label htmlFor="file">Upload Photo/Video Evidence</label>
-            <input type="file" id="file" onChange={handleFileChange} />
-          </div>
+            <label htmlFor="location">Location (City, State, or GPS)</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="e.g., 'New York, NY' or '40.7128, -74.0060'"
+              value={formData.location}
+              onChange={handleChange}
+              required
+            />
 
-          <div className={styles.formGroup}>
-            <label>GPS & Timestamp</label>
-            {location ? (
-              <p className={styles.metadata}>
-                {`Lat: ${location.latitude.toFixed(4)}, Lon: ${location.longitude.toFixed(4)}`}
-              </p>
-            ) : (
-              <p className={styles.metadata}>Retrieving location...</p>
-            )}
-            {timestamp && <p className={styles.metadata}>{new Date(timestamp).toLocaleString()}</p>}
-          </div>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows={4}
+              placeholder="Provide a brief, factual description of the incident."
+              value={formData.description}
+              onChange={handleChange}
+            ></textarea>
 
-          <button type="submit" className={styles.submitButton}>Report Incident</button>
-        </form>
-      </div>
+            <div className={styles.verificationSection}>
+              <IDKitWidget
+                app_id={process.env.NEXT_PUBLIC_WLD_APP_ID as string}
+                action="submit-report"
+                onSuccess={handleVerify}
+              >
+                {({ open }) => (
+                  <button type="button" onClick={open} className={styles.worldIdButton}>
+                    Verify with World ID
+                  </button>
+                )}
+              </IDKitWidget>
+
+              <button type="submit" className={styles.submitButton} disabled={!isVerified}>
+                {isVerified ? 'Submit Report' : 'Verification Required'}
+              </button>
+            </div>
+          </form>
+        )}
+      </main>
     </div>
   );
 }
