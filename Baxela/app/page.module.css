@@ -77,3 +77,9 @@
 .submitButton:hover {
   background-color: #005bb5;
 }
+
+.metadata {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
