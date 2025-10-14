@@ -13,7 +13,7 @@ export default function ReportPage() {
   });
   const [isVerified, setIsVerified] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submissionResult, setSubmissionResult] = useState<{ success: boolean; ipfsHash?: string } | null>(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,22 +45,40 @@ export default function ReportPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isVerified) {
       alert('Please complete the World ID verification process first.');
       return;
     }
     setIsSubmitting(true);
-    console.log('Submitting incident report:', formData);
-    // Simulate backend submission
-    setTimeout(() => {
-      setIsSubmitted(true);
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Submission successful, IPFS Hash:', result.ipfsHash);
+        setSubmissionResult({ success: true, ipfsHash: result.ipfsHash });
+      } else {
+        console.error('Submission failed:', result);
+        setSubmissionResult({ success: false });
+      }
+    } catch (error) {
+      console.error('Error submitting incident:', error);
+      setSubmissionResult({ success: false });
+    } finally {
       setIsSubmitting(false);
-      setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '' });
-      setIsVerified(false);
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1000);
+    }
+  };
+
+  const resetForm = () => {
+    setSubmissionResult(null);
+    setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '' });
+    setIsVerified(false);
   };
 
   return (
@@ -71,14 +89,31 @@ export default function ReportPage() {
       </header>
 
       <main className={styles.main}>
-        {isSubmitted ? (
+        {submissionResult ? (
           <div className={styles.successMessage}>
-            <h2>Thank you!</h2>
-            <p>Your incident report has been submitted for verification.</p>
-            <Link href="/dashboard">View it on the dashboard</Link>
+            {submissionResult.success ? (
+              <>
+                <h2>Thank you!</h2>
+                <p>Your incident report has been permanently stored on IPFS.</p>
+                <p>
+                  <strong>IPFS Hash:</strong>{' '}
+                  <a 
+                    href={`https://gateway.pinata.cloud/ipfs/${submissionResult.ipfsHash}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    {submissionResult.ipfsHash}
+                  </a>
+                </p>
+              </>
+            ) : (
+              <h2>Submission Failed</h2>
+            )}
+            <button onClick={resetForm} className={styles.submitButton}>Submit Another Report</button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={styles.form}>
+            {/* Form fields remain the same */}
             <label htmlFor="type">Incident Type</label>
             <select id="type" name="type" value={formData.type} onChange={handleChange} disabled={isSubmitting}>
               <option>Vote Buying</option>
