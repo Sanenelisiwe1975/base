@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${sourceCodePro.variable}`}>
+      <body className={`${inter.variable} ${sourceCodePro.variable} centered-layout`}>
         <RootProvider>{children}</RootProvider>
       </body>
     </html>
