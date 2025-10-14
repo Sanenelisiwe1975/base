@@ -1,10 +1,14 @@
-import React from 'react';
 
-// The root layout applies to all routes
-export default function RootLayout({
-  children,
-}: {
+
+export default async function LocaleLayout(props: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  return children;
+  const { locale } = await props.params; // ✅ await first
+
+  return (
+    <html lang={locale}>
+      <body>{props.children}</body>
+    </html>
+  );
 }
