@@ -9,7 +9,7 @@ const nextConfig = {
     defaultLocale: 'en'
   },
 
-  webpack: (config) => {
+  webpack: (config: any) => {
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
