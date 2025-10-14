@@ -183,7 +183,7 @@ export default function ReportPage() {
 
             <div className={styles.verificationSection}>
               <IDKitWidget
-                app_id={process.env.NEXT_PUBLIC_WLD_APP_ID as string}
+                app_id={process.env.NEXT_PUBLIC_WLD_APP_ID as `app_${string}`}
                 action="submit-report"
                 onSuccess={handleVerify}
               >
