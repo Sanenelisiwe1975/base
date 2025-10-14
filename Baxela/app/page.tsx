@@ -163,7 +163,7 @@ export default function ReportPage() {
               type="text"
               id="location"
               name="location"
-              placeholder="e.g., 'New York, NY' or '40.7128, -74.0060'"
+              placeholder="e.g., 'Sekhukhune, Sk' or '40.7128, -74.0060'"
               value={formData.location}
               onChange={handleChange}
               required
