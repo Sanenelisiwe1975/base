@@ -19,9 +19,9 @@ export async function POST(req: NextRequest) {
         name: `Baxela_Incident_Report_${Date.now()}`,
         keyvalues: {
           project: 'Baxela',
-          type: incidentData.type,
-          severity: incidentData.severity,
-          language: incidentData.language,
+          type: String(incidentData.type),
+          severity: String(incidentData.severity),
+          language: String(incidentData.language),
         },
       },
     };
