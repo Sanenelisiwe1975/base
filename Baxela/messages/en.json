@@ -1,0 +1,48 @@
+{
+  "ReportPage": {
+    "title": "Report an Incident",
+    "viewDashboard": "View Dashboard →",
+    "languageLabel": "Language",
+    "incidentTypeLabel": "Incident Type",
+    "types": {
+      "voteBuying": "Vote Buying",
+      "ballotStuffing": "Ballot Stuffing",
+      "intimidation": "Intimidation",
+      "tampering": "Tampering",
+      "misinformation": "Misinformation",
+      "other": "Other"
+    },
+    "severityLabel": "Perceived Severity (1-5)",
+    "locationLabel": "Location (City, State, or GPS)",
+    "descriptionLabel": "Description",
+    "verifyButton": "1. Verify with World ID",
+    "submitButton": "2. Submit Report",
+    "submitting": "Submitting...",
+    "verifying": "Verifying...",
+    "successTitle": "Submission Successful!",
+    "successMessage": "Your report has been submitted to the decentralized network.",
+    "ipfsHash": "IPFS Hash:",
+    "viewOnIpfs": "View on IPFS",
+    "submitAnother": "Submit Another Report",
+    "failTitle": "Submission Failed",
+    "failMessage": "There was an error submitting your report. Please try again."
+  },
+  "Languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "ja": "日本語",
+    "zh": "中文",
+    "af": "Afrikaans",
+    "nr": "isiNdebele",
+    "nso": "Sepedi",
+    "st": "Sesotho",
+    "ss": "siSwati",
+    "ts": "Xitsonga",
+    "tn": "Setswana",
+    "ve": "Tshivenḓa",
+    "xh": "isiXhosa",
+    "zu": "isiZulu"
+  }
+}
