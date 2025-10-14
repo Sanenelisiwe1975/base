@@ -12,6 +12,7 @@ export default function ReportPage() {
     description: '',
   });
   const [isVerified, setIsVerified] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -19,30 +20,47 @@ export default function ReportPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleVerify = (result: ISuccessResult) => {
-    // In a real app, you'd want to send the proof to your backend for verification
-    console.log('World ID Verification Success:', result);
-    setIsVerified(true);
+  const handleVerify = async (result: ISuccessResult) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ proof: result, action: 'submit-report' }),
+      });
+
+      if (response.ok) {
+        console.log('Backend verification successful');
+        setIsVerified(true);
+      } else {
+        const errorData = await response.json();
+        console.error('Backend verification failed:', errorData);
+        alert('Verification failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error calling verification API:', error);
+      alert('An error occurred during verification. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!isVerified) {
-      alert('Please verify your identity with World ID before submitting.');
+      alert('Please complete the World ID verification process first.');
       return;
     }
+    setIsSubmitting(true);
     console.log('Submitting incident report:', formData);
-    // Here you would typically send the data to a backend or smart contract
-    setIsSubmitted(true);
-    // Reset form after submission
-    setFormData({
-      type: 'Vote Buying',
-      severity: 3,
-      location: '',
-      description: '',
-    });
-    setIsVerified(false); // Require re-verification for new report
-    setTimeout(() => setIsSubmitted(false), 5000); // Reset submission status message
+    // Simulate backend submission
+    setTimeout(() => {
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+      setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '' });
+      setIsVerified(false);
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }, 1000);
   };
 
   return (
@@ -62,7 +80,7 @@ export default function ReportPage() {
         ) : (
           <form onSubmit={handleSubmit} className={styles.form}>
             <label htmlFor="type">Incident Type</label>
-            <select id="type" name="type" value={formData.type} onChange={handleChange}>
+            <select id="type" name="type" value={formData.type} onChange={handleChange} disabled={isSubmitting}>
               <option>Vote Buying</option>
               <option>Ballot Stuffing</option>
               <option>Intimidation</option>
@@ -80,6 +98,7 @@ export default function ReportPage() {
               max="5"
               value={formData.severity}
               onChange={handleChange}
+              disabled={isSubmitting}
             />
             <span>{formData.severity}</span>
 
@@ -92,6 +111,7 @@ export default function ReportPage() {
               value={formData.location}
               onChange={handleChange}
               required
+              disabled={isSubmitting}
             />
 
             <label htmlFor="description">Description</label>
@@ -102,6 +122,7 @@ export default function ReportPage() {
               placeholder="Provide a brief, factual description of the incident."
               value={formData.description}
               onChange={handleChange}
+              disabled={isSubmitting}
             ></textarea>
 
             <div className={styles.verificationSection}>
@@ -111,14 +132,14 @@ export default function ReportPage() {
                 onSuccess={handleVerify}
               >
                 {({ open }) => (
-                  <button type="button" onClick={open} className={styles.worldIdButton}>
-                    Verify with World ID
+                  <button type="button" onClick={open} className={styles.worldIdButton} disabled={isSubmitting || isVerified}>
+                    {isVerified ? '✓ Verified' : '1. Verify with World ID'}
                   </button>
                 )}
               </IDKitWidget>
 
-              <button type="submit" className={styles.submitButton} disabled={!isVerified}>
-                {isVerified ? 'Submit Report' : 'Verification Required'}
+              <button type="submit" className={styles.submitButton} disabled={!isVerified || isSubmitting}>
+                {isSubmitting ? 'Submitting...' : '2. Submit Report'}
               </button>
             </div>
           </form>
