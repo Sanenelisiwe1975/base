@@ -12,27 +12,42 @@ export async function POST(req: NextRequest) {
 
   try {
     const pinata = new pinataSDK(pinataApiKey, pinataApiSecret);
-    const incidentData = await req.json();
+    const formData = await req.formData();
+    const incidentData = JSON.parse(formData.get('data') as string);
+    const mediaFile = formData.get('media') as File;
 
-    const options = {
+    // If media is present, upload it to IPFS first
+    let mediaHash = null;
+    if (mediaFile) {
+      const mediaBuffer = await mediaFile.arrayBuffer();
+      const mediaResult = await pinata.pinFileToIPFS(Buffer.from(mediaBuffer));
+      mediaHash = mediaResult.IpfsHash;
+    }
+
+    // Add media and analysis results to the incident data
+    const enrichedData = {
+      ...incidentData,
+      mediaHash,
+      mediaAnalysis: incidentData.mediaAnalysis,
+      textAnalysis: incidentData.textAnalysis
+    };
+
+    const result = await pinata.pinJSONToIPFS(enrichedData, {
       pinataMetadata: {
         name: `Baxela_Incident_Report_${Date.now()}`,
         keyvalues: {
           project: 'Baxela',
-          type: String(incidentData.type),
-          severity: String(incidentData.severity),
-          language: String(incidentData.language),
-        },
-      },
-    };
+          type: String(enrichedData.type),
+          severity: String(enrichedData.severity),
+          language: String(enrichedData.language),
+          hasMedia: Boolean(mediaHash).toString()
+        }
+      }
+    });
 
-    const result = await pinata.pinJSONToIPFS(incidentData, options);
-
-    console.log('Data pinned to IPFS:', result);
-    return NextResponse.json({ success: true, ipfsHash: result.IpfsHash }, { status: 200 });
-
+    return NextResponse.json({ success: true, ipfsHash: result.IpfsHash });
   } catch (error) {
-    console.error('Error pinning data to IPFS:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error submitting incident:', error);
+    return NextResponse.json({ error: 'Submission failed' }, { status: 500 });
   }
 }
