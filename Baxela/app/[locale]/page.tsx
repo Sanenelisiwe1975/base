@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -163,4 +163,84 @@ export default function ReportPage() {
       </main>
     </div>
   );
+}
+
+const [media, setMedia] = useState<File | null>(null);
+const [mediaAnalysis, setMediaAnalysis] = useState(null);
+const [textAnalysis, setTextAnalysis] = useState(null);
+const fileInputRef = useRef<HTMLInputElement>(null);
+
+const handleMediaChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  setMedia(file);
+  
+  // Create a URL for the file
+  const mediaUrl = URL.createObjectURL(file);
+  
+  // Analyze media for deepfakes
+  const mediaType = file.type.startsWith('image/') ? 'image' : 'video';
+  const mediaRes = await fetch('/api/analyze-media', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mediaUrl, mediaType })
+  });
+  
+  const mediaAnalysisResult = await mediaRes.json();
+  setMediaAnalysis(mediaAnalysisResult);
+};
+
+const handleDescriptionChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const text = e.target.value;
+  handleChange(e);
+
+  // Analyze text
+  const textRes = await fetch('/api/analyze-text', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text })
+  });
+
+  const textAnalysisResult = await textRes.json();
+  setTextAnalysis(textAnalysisResult);
+};
+
+// Update the form JSX to include file upload
+return (
+  <label htmlFor="media">{t('mediaLabel')}</label>
+  <input
+    type="file"
+    id="media"
+    accept="image/*,video/*"
+    onChange={handleMediaChange}
+    ref={fileInputRef}
+  />
+  
+  {mediaAnalysis && mediaAnalysis.isDeepfake && (
+    <div className={styles.warning}>
+      ⚠️ This media may be AI-generated or manipulated
+    </div>
+  )}
+
+  <label htmlFor="description">{t('descriptionLabel')}</label>
+  <textarea
+    id="description"
+    name="description"
+    value={formData.description}
+    onChange={handleDescriptionChange}
+    required
+  />
+  
+  {textAnalysis && (
+    <div className={styles.analysis}>
+      Detected category: {textAnalysis.classification}
+      (Confidence: {Math.round(textAnalysis.confidence * 100)}%)
+    </div>
+  )}
+  
+  {/* ... rest of the form ... */}
+</form>
+{/* ... rest of the component ... */}
+);
 }
