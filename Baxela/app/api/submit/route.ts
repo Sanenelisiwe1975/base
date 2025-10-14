@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
           project: 'Baxela',
           type: incidentData.type,
           severity: incidentData.severity,
+          language: incidentData.language,
         },
       },
     };

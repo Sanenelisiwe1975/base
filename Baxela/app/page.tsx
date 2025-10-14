@@ -10,6 +10,7 @@ export default function ReportPage() {
     severity: 3,
     location: '',
     description: '',
+    language: 'en', // Default language
   });
   const [isVerified, setIsVerified] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -77,7 +78,7 @@ export default function ReportPage() {
 
   const resetForm = () => {
     setSubmissionResult(null);
-    setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '' });
+    setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '', language: 'en' });
     setIsVerified(false);
   };
 
@@ -114,6 +115,26 @@ export default function ReportPage() {
         ) : (
           <form onSubmit={handleSubmit} className={styles.form}>
             {/* Form fields remain the same */}
+            <label htmlFor="language">Language</label>
+            <select id="language" name="language" value={formData.language} onChange={handleChange} disabled={isSubmitting}>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="de">Deutsch</option>
+              <option value="ja">日本語</option>
+              <option value="zh">中文</option>
+              <option value="af">Afrikaans</option>
+              <option value="nr">isiNdebele</option>
+              <option value="nso">Sepedi</option>
+              <option value="st">Sesotho</option>
+              <option value="ss">siSwati</option>
+              <option value="ts">Xitsonga</option>
+              <option value="tn">Setswana</option>
+              <option value="ve">Tshivenḓa</option>
+              <option value="xh">isiXhosa</option>
+              <option value="zu">isiZulu</option>
+            </select>
+
             <label htmlFor="type">Incident Type</label>
             <select id="type" name="type" value={formData.type} onChange={handleChange} disabled={isSubmitting}>
               <option>Vote Buying</option>
