@@ -11,19 +11,18 @@ export default async function LocaleLayout(props: {
   );
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen font-sans text-gray-800">
         <header className="bg-white shadow-md py-4 px-8 flex justify-between items-center">
           <h1 className="text-2xl font-bold text-indigo-700">Your App Name</h1>
-          {/* Add navigation or language switcher here */}
         </header>
         <main className="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-2xl shadow-lg">
           {children}
         </main>
         <footer className="text-center py-6 text-gray-500">
-          &copy; {new Date().getFullYear()} Your App Name
+          &copy; 2024 Your App Name
         </footer>
       </body>
     </html>
