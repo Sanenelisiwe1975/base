@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import pinataSDK from '@pinata/sdk';
+import { Readable } from 'stream';
 
 export async function POST(req: NextRequest) {
   const pinataApiKey = process.env.PINATA_API_KEY;
@@ -13,36 +14,48 @@ export async function POST(req: NextRequest) {
   try {
     const pinata = new pinataSDK(pinataApiKey, pinataApiSecret);
     const formData = await req.formData();
-    const incidentData = JSON.parse(formData.get('data') as string);
-    const mediaFile = formData.get('media') as File;
 
-    // If media is present, upload it to IPFS first
+    const type = formData.get('type') as string;
+    const severity = formData.get('severity') as string;
+    const location = formData.get('location') as string;
+    const description = formData.get('description') as string;
+    const mediaFile = formData.get('media') as File | null;
+    const mediaAnalysis = formData.get('mediaAnalysis') ? JSON.parse(formData.get('mediaAnalysis') as string) : null;
+    const textAnalysis = formData.get('textAnalysis') ? JSON.parse(formData.get('textAnalysis') as string) : null;
+
     let mediaHash = null;
     if (mediaFile) {
-      const mediaBuffer = await mediaFile.arrayBuffer();
-      const mediaResult = await pinata.pinFileToIPFS(Buffer.from(mediaBuffer));
+      const stream = Readable.from(Buffer.from(await mediaFile.arrayBuffer()));
+      const options = {
+        pinataMetadata: {
+          name: mediaFile.name,
+        },
+      };
+      const mediaResult = await pinata.pinFileToIPFS(stream, options);
       mediaHash = mediaResult.IpfsHash;
     }
 
-    // Add media and analysis results to the incident data
-    const enrichedData = {
-      ...incidentData,
+    const incidentData = {
+      type,
+      severity,
+      location,
+      description,
       mediaHash,
-      mediaAnalysis: incidentData.mediaAnalysis,
-      textAnalysis: incidentData.textAnalysis
+      mediaAnalysis,
+      textAnalysis,
+      timestamp: new Date().toISOString(),
     };
 
-    const result = await pinata.pinJSONToIPFS(enrichedData, {
+    const result = await pinata.pinJSONToIPFS(incidentData, {
       pinataMetadata: {
         name: `Baxela_Incident_Report_${Date.now()}`,
         keyvalues: {
           project: 'Baxela',
-          type: String(enrichedData.type),
-          severity: String(enrichedData.severity),
-          language: String(enrichedData.language),
-          hasMedia: Boolean(mediaHash).toString()
-        }
-      }
+          type: incidentData.type,
+          severity: incidentData.severity,
+          hasMedia: Boolean(mediaHash).toString(),
+        },
+      },
     });
 
     return NextResponse.json({ success: true, ipfsHash: result.IpfsHash });

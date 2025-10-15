@@ -13,7 +13,16 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png',
 });
 
-const HeatmapLayer = ({ points }) => {
+interface Incident {
+  location: string;
+  type: string;
+  severity: number;
+  description: string;
+  lat?: number;
+  lng?: number;
+}
+
+const HeatmapLayer = ({ points }: { points: number[][] }) => {
   const map = useMap();
 
   useEffect(() => {
@@ -34,11 +43,11 @@ const HeatmapLayer = ({ points }) => {
   return null;
 };
 
-const Map = ({ incidents }) => {
-  const [points, setPoints] = useState([]);
+const Map = ({ incidents }: { incidents: Incident[] }) => {
+  const [points, setPoints] = useState<Incident[]>([]);
 
   useEffect(() => {
-    const geocodeIncident = async (incident) => {
+    const geocodeIncident = async (incident: Incident): Promise<Incident | null> => {
       // Check if location is already GPS coordinates
       const gpsMatch = incident.location.match(/^(-?\d+\.?\d*),\s*(-?\d+\.?\d*)$/);
       if (gpsMatch) {
@@ -55,14 +64,12 @@ const Map = ({ incidents }) => {
       } catch (error) {
         console.error('Geocoding error:', error);
       }
-      return null; // Return null if geocoding fails
+      return null;
     };
 
     const processIncidents = async () => {
       const geocodedPromises = incidents.map(geocodeIncident);
-      const geocodedIncidents = (await Promise.all(geocodedPromises)).filter(Boolean);
-      
-      const heatPoints = geocodedIncidents.map(p => [p.lat, p.lng, p.severity / 5]); // lat, lng, intensity
+      const geocodedIncidents = (await Promise.all(geocodedPromises)).filter((p): p is Incident => p !== null && p.lat !== undefined && p.lng !== undefined);
       setPoints(geocodedIncidents);
     };
 
@@ -73,7 +80,7 @@ const Map = ({ incidents }) => {
     }
   }, [incidents]);
 
-  const center: [number, number] = [20, 0]; // Default center
+  const center: [number, number] = [20, 0];
 
   return (
     <MapContainer center={center} zoom={2} style={{ height: '100%', width: '100%' }}>
@@ -81,9 +88,9 @@ const Map = ({ incidents }) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      {points.length > 0 && <HeatmapLayer points={points.map(p => [p.lat, p.lng, p.severity / 5])} />}
+      {points.length > 0 && <HeatmapLayer points={points.map(p => [p.lat!, p.lng!, p.severity / 5])} />}
       {points.map((point, idx) => (
-        <Marker key={idx} position={[point.lat, point.lng]}>
+        <Marker key={idx} position={[point.lat!, point.lng!]}>
           <Popup>
             <strong>{point.type}</strong><br />
             Severity: {point.severity}/5<br />

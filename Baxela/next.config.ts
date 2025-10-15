@@ -1,19 +1,23 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
-
-const withNextIntl = createNextIntlPlugin('./i18n.ts');
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n: {
-    locales: ['en', 'es', 'fr', 'de', 'ja', 'zh', 'af', 'nr', 'nso', 'st', 'ss', 'ts', 'tn', 've', 'xh', 'zu'],
-    defaultLocale: 'en'
-  },
+  webpack: (config: any, { isServer }: { isServer: boolean }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        '@react-native-async-storage/async-storage': false,
+        'webworker-threads': false,
+        'pino-pretty': false,
+      };
+    }
 
-  webpack: (config: any) => {
-    config.externals.push("pino-pretty", "lokijs", "encoding");
+    config.ignoreWarnings = [
+      { module: /node_modules\/@metamask\/sdk/ },
+      { module: /node_modules\/natural/ },
+      { module: /node_modules\/pino/ },
+    ];
+
     return config;
   },
 };
 
-module.exports = nextConfig;
-export default withNextIntl(nextConfig);
+export default nextConfig;

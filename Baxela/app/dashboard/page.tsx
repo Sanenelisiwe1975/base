@@ -76,8 +76,8 @@ export default function Dashboard() {
               : `Tracking ${incidents.length} verified incident(s) on the decentralized network.`}
           </p>
           <p className={styles.disclaimer}>
-            This map displays real-time, user-submitted reports that have been verified by World ID and permanently stored on IPFS.
-          </p>
+          This map displays real-time, user-submitted reports that have been permanently stored on IPFS. Each report is verified through World ID to ensure authenticity.
+        </p>
         </div>
       </main>
     </div>
