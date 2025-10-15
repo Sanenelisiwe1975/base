@@ -18,10 +18,6 @@ export default function LandingPage() {
         <section className={styles.hero}>
           <h2 className={styles.heroTitle}>Democracy. Verified by You.</h2>
           <p className={styles.heroSubtitle}>A citizen-driven platform for transparent and secure election monitoring.</p>
-          <div className={styles.heroButtons}>
-            <Link href="/report" className={`${styles.button} ${styles.buttonPrimary}`}>Report an Incident</Link>
-            <Link href="/dashboard" className={`${styles.button} ${styles.buttonSecondary}`}>View Dashboard</Link>
-          </div>
         </section>
 
         <section className={styles.howItWorks}>
@@ -34,16 +30,11 @@ export default function LandingPage() {
             </div>
             <div className={styles.step}>
               <div className={styles.stepNumber}>2</div>
-              <h4 className={styles.stepTitle}>Verify</h4>
-              <p>Verify your identity using World ID to ensure one report per person.</p>
-            </div>
-            <div className={styles.step}>
-              <div className={styles.stepNumber}>3</div>
               <h4 className={styles.stepTitle}>Publish</h4>
               <p>Your report is published to a decentralized map on IPFS.</p>
             </div>
             <div className={styles.step}>
-              <div className={styles.stepNumber}>4</div>
+              <div className={styles.stepNumber}>3</div>
               <h4 className={styles.stepTitle}>View</h4>
               <p>Browse all verified reports on a public dashboard.</p>
             </div>
@@ -62,10 +53,6 @@ export default function LandingPage() {
               <p>AI-powered analysis of media and text helps to identify deepfakes and classify reports.</p>
             </div>
             <div className={styles.feature}>
-              <h4 className={styles.featureTitle}>World ID</h4>
-              <p>Anonymous, one-person-one-vote verification to prevent spam and duplicate reports.</p>
-            </div>
-            <div className={styles.feature}>
               <h4 className={styles.featureTitle}>Map Transparency</h4>
               <p>A real-time map provides a clear and accessible overview of all reported incidents.</p>
             </div>
@@ -74,7 +61,7 @@ export default function LandingPage() {
       </main>
 
       <footer className={styles.footer}>
-        <p>&copy; 2024 Baxela. All rights reserved.</p>
+        <p>&copy; 2025 Baxela. All rights reserved.</p>
       </footer>
     </div>
   );

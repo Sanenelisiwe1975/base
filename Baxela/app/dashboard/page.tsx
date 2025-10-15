@@ -7,8 +7,19 @@ import styles from './dashboard.module.css';
 // Dynamically import the Map component to prevent SSR issues with Leaflet
 const Map = dynamic(() => import('./Map'), { ssr: false });
 
+interface Incident {
+  type: string;
+  severity: number;
+  location: string;
+  description: string;
+  mediaHash: string | null;
+  mediaAnalysis: any;
+  textAnalysis: any;
+  timestamp: string;
+}
+
 export default function Dashboard() {
-  const [incidents, setIncidents] = useState([]);
+  const [incidents, setIncidents] = useState<Incident[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -30,7 +41,7 @@ export default function Dashboard() {
         }
 
         // 2. Fetch the JSON data for each hash from the IPFS gateway
-        const incidentPromises = hashes.map(hash =>
+        const incidentPromises = hashes.map((hash: string) =>
           fetch(`https://gateway.pinata.cloud/ipfs/${hash}`).then(res => {
             if (!res.ok) {
               console.error(`Failed to fetch data for hash: ${hash}`);
@@ -41,13 +52,19 @@ export default function Dashboard() {
         );
         
         const settledIncidents = await Promise.all(incidentPromises);
-        const validIncidents = settledIncidents.filter(incident => incident !== null); // Filter out any that failed
-
+        const validIncidents = settledIncidents
+          .filter(incident => incident !== null) // Filter out any that failed
+          .map(incident => ({ ...incident, severity: parseInt(incident.severity, 10) })); // Parse severity to a number
+      
         setIncidents(validIncidents);
-
+      
       } catch (err) {
         console.error("Error loading incidents:", err);
-        setError(err.message);
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
       } finally {
         setIsLoading(false);
       }
@@ -76,8 +93,8 @@ export default function Dashboard() {
               : `Tracking ${incidents.length} verified incident(s) on the decentralized network.`}
           </p>
           <p className={styles.disclaimer}>
-          This map displays real-time, user-submitted reports that have been permanently stored on IPFS. Each report is verified through World ID to ensure authenticity.
-        </p>
+            This map displays real-time, user-submitted reports that have been permanently stored on IPFS.
+          </p>
         </div>
       </main>
     </div>
