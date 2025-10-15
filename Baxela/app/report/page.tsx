@@ -2,7 +2,6 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit';
 import styles from './report.module.css';
 
 export default function ReportPage() {
@@ -12,7 +11,6 @@ export default function ReportPage() {
     location: '',
     description: '',
   });
-  const [isVerified, setIsVerified] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<{ success: boolean; ipfsHash?: string } | null>(null);
 
@@ -26,11 +24,6 @@ export default function ReportPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: name === 'severity' ? parseInt(value, 10) : value }));
-  };
-
-  const handleVerify = (result: ISuccessResult) => {
-    console.log('World ID Verification Success:', result);
-    setIsVerified(true);
   };
 
   const handleMediaChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,10 +71,6 @@ export default function ReportPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isVerified) {
-      alert('Please verify with World ID first.');
-      return;
-    }
     setIsSubmitting(true);
     setSubmissionResult(null);
 
@@ -118,7 +107,6 @@ export default function ReportPage() {
   const resetForm = () => {
     setSubmissionResult(null);
     setFormData({ type: 'Vote Buying', severity: 3, location: '', description: '' });
-    setIsVerified(false);
     setMedia(null);
     setMediaPreview(null);
     setMediaAnalysis(null);
@@ -227,19 +215,7 @@ export default function ReportPage() {
               />
             </div>
 
-            <IDKitWidget
-              app_id="app_staging_12345"
-              action="report-incident"
-              onSuccess={handleVerify}
-            >
-              {({ open }) => (
-                <button onClick={open} className={`${styles.button} ${styles.worldIdButton}`}>
-                  Verify with World ID
-                </button>
-              )}
-            </IDKitWidget>
-
-            <button type="submit" className={styles.button} disabled={!isVerified || isSubmitting}>
+            <button type="submit" className={styles.button} disabled={isSubmitting}>
               {isSubmitting ? 'Submitting...' : 'Submit Report'}
             </button>
           </form>
