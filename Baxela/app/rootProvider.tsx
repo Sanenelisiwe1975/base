@@ -1,25 +1,35 @@
 "use client";
-import { ReactNode } from "react";
-import { base } from "wagmi/chains";
-import { OnchainKitProvider } from "@coinbase/onchainkit";
-import "@coinbase/onchainkit/styles.css";
 
-export function RootProvider({ children }: { children: ReactNode }) {
+import { ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiProvider } from 'wagmi';
+import TranslationProvider from '@/components/TranslationProvider';
+import { BaseAccountProvider } from '@/components/FeatureAccess';
+import { config } from '@/lib/wagmi';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+interface RootProviderProps {
+  children: ReactNode;
+}
+
+export default function RootProvider({ children }: RootProviderProps) {
   return (
-    <OnchainKitProvider
-      apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-      chain={base}
-      config={{
-        appearance: {
-          mode: "auto",
-        },
-        wallet: {
-          display: "modal",
-          preference: "all",
-        },
-      }}
-    >
-      {children}
-    </OnchainKitProvider>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <TranslationProvider>
+          <BaseAccountProvider>
+            {children}
+          </BaseAccountProvider>
+        </TranslationProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

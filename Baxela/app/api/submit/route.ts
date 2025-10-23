@@ -35,10 +35,25 @@ export async function POST(req: NextRequest) {
       mediaHash = mediaResult.IpfsHash;
     }
 
+    // Parse location if it contains coordinates (format: "lat,lng" or address)
+    let lat = null;
+    let lng = null;
+    let locationAddress = location;
+    
+    // Check if location contains coordinates (simple format: "lat,lng")
+    const coordMatch = location.match(/^(-?\d+\.?\d*),\s*(-?\d+\.?\d*)$/);
+    if (coordMatch) {
+      lat = parseFloat(coordMatch[1]);
+      lng = parseFloat(coordMatch[2]);
+      locationAddress = `${lat}, ${lng}`;
+    }
+
     const incidentData = {
       type,
       severity,
-      location,
+      location: locationAddress,
+      lat,
+      lng,
       description,
       mediaHash,
       mediaAnalysis,

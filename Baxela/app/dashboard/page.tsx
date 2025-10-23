@@ -6,6 +6,7 @@ import styles from './dashboard.module.css';
 
 // Dynamically import the Map component to prevent SSR issues with Leaflet
 const Map = dynamic(() => import('./Map'), { ssr: false });
+const UserLocationMap = dynamic(() => import('../../components/UserLocationMap').then(mod => ({ default: mod.UserLocationMap })), { ssr: false });
 
 interface Incident {
   type: string;
@@ -60,11 +61,10 @@ export default function Dashboard() {
       
       } catch (err) {
         console.error("Error loading incidents:", err);
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+        // Instead of showing an error, treat this as "no incidents available"
+        // This allows the dashboard to gracefully fall back to the global map
+        setIncidents([]);
+        setError(null);
       } finally {
         setIsLoading(false);
       }
@@ -81,19 +81,28 @@ export default function Dashboard() {
       </header>
       <main className={styles.main}>
         <div className={styles.mapContainer}>
-          {isLoading && <p>Loading incident data from IPFS...</p>}
-          {error && <p className={styles.error}>Error: {error}</p>}
-          {!isLoading && !error && <Map incidents={incidents} />}
+          {isLoading && <p>Loading incident data...</p>}
+          {!isLoading && incidents.length > 0 && <Map incidents={incidents} />}
+          {!isLoading && incidents.length === 0 && (
+            <UserLocationMap 
+              className={styles.userLocationMap} 
+              height="600px" 
+            />
+          )}
         </div>
         <div className={styles.summary}>
-          <h2>Live Incidents</h2>
+          <h2>{incidents.length > 0 ? 'Live Incidents' : 'Global Community'}</h2>
           <p>
             {isLoading
               ? 'Loading...'
-              : `Tracking ${incidents.length} verified incident(s) on the decentralized network.`}
+              : incidents.length > 0
+              ? `Tracking ${incidents.length} verified incident(s) on the decentralized network.`
+              : 'No incidents to display at the moment. This could be due to no recent reports or temporary connectivity issues. Explore our global community of users below.'}
           </p>
           <p className={styles.disclaimer}>
-            This map displays real-time, user-submitted reports that have been permanently stored on IPFS.
+            {incidents.length > 0
+              ? 'This map displays real-time, user-submitted reports that have been permanently stored on IPFS.'
+              : 'This map shows the global distribution of Baxela users. When incidents are reported, they will appear here with verified data from IPFS.'}
           </p>
         </div>
       </main>

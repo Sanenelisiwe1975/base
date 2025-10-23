@@ -1,0 +1,258 @@
+{
+  "app": {
+    "title": "Incident Reporter",
+    "description": "Report and track incidents in your area"
+  },
+  "navigation": {
+    "mapView": "Map View",
+    "analytics": "Analytics Dashboard"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "disconnect": "Disconnect",
+    "address": "Address"
+  },
+  "auth": {
+    "title": "Sign in with Base Account",
+    "description": "Connect your Base Account to access all features and enjoy a seamless experience.",
+    "connect": "Connect Base Account",
+    "connecting": "Connecting...",
+    "connected": "Connected to Base Account",
+    "disconnect": "Disconnect",
+    "disconnected": "Disconnected from Base Account",
+    "success": "Successfully authenticated with Base Account!",
+    "error": "Authentication failed",
+    "errorPrefix": "Error:",
+    "allFeaturesEnabled": "All features are now available!",
+    "benefits": {
+      "title": "Base Account Benefits",
+      "gasless": "Gasless transactions with paymaster integration",
+      "security": "Enhanced security with passkey authentication",
+      "features": "Access to all premium features",
+      "crossApp": "Cross-app portability and seamless experience",
+      "fast": "Fast and low-cost transactions on Base L2"
+    }
+  },
+  "features": {
+    "reporting": {
+      "locked": "Incident Reporting Locked",
+      "description": "Connect your Base Account to report incidents and help your community."
+    },
+    "analytics": {
+      "locked": "Analytics Dashboard Locked",
+      "description": "Connect your Base Account to access detailed analytics and insights."
+    },
+    "premium": {
+      "locked": "Premium Feature Locked",
+      "description": "Connect your Base Account to unlock premium features and advanced functionality."
+    },
+    "general": {
+      "locked": "Feature Locked",
+      "description": "Connect your Base Account to access this feature."
+    }
+  },
+  "location": {
+    "permission": {
+      "title": "Location Access Required",
+      "description": "This app needs access to your location to accurately report incidents and show nearby reports.",
+      "request": "Enable Location Access",
+      "granted": "Location access granted",
+      "denied": "Location access denied",
+      "unavailable": "Location services unavailable",
+      "timeout": "Location request timed out",
+      "error": "Error accessing location",
+      "instructions": {
+        "title": "How to enable location access:",
+        "chrome": "Click the location icon in the address bar and select 'Allow'",
+        "firefox": "Click 'Share Location' when prompted, or check the shield icon",
+        "safari": "Go to Safari > Preferences > Websites > Location Services",
+        "edge": "Click the location icon in the address bar and select 'Allow'"
+      }
+    },
+    "current": "Current Location",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "accuracy": "Accuracy"
+  },
+  "incident": {
+    "report": {
+      "title": "Report New Incident",
+      "form": {
+        "title": "Incident Title",
+        "titlePlaceholder": "Brief description of the incident",
+        "description": "Description",
+        "descriptionPlaceholder": "Detailed description of what happened",
+        "category": "Category",
+        "severity": "Severity",
+        "files": "Upload Files",
+        "filesHelp": "Upload images, videos, or documents (max 50MB each)",
+        "submit": "Submit Report",
+        "submitting": "Submitting...",
+        "success": "Incident reported successfully!",
+        "error": "Failed to submit incident report"
+      },
+      "categories": {
+        "accident": "Accident",
+        "crime": "Crime",
+        "fire": "Fire",
+        "medical": "Medical Emergency",
+        "natural_disaster": "Natural Disaster",
+        "infrastructure": "Infrastructure",
+        "environmental": "Environmental",
+        "other": "Other"
+      },
+      "severities": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "critical": "Critical"
+      }
+    },
+    "map": {
+      "title": "Live Incident Map",
+      "loading": "Loading incidents...",
+      "showingIncidents": "Showing {{count}} reported incident",
+      "showingIncidents_plural": "Showing {{count}} reported incidents",
+      "legend": {
+        "title": "Legend",
+        "high": "High Severity",
+        "medium": "Medium Severity",
+        "low": "Low Severity",
+        "severity": "Severity Levels",
+        "categories": "Categories",
+        "userLocation": "Your Location"
+      },
+      "popup": {
+        "reportedBy": "Reported by",
+        "reportedAt": "Reported at",
+        "category": "Category",
+        "severity": "Severity",
+        "description": "Description",
+        "viewDetails": "View Details"
+      }
+    },
+    "details": {
+      "title": "Incident Details",
+      "id": "Incident ID",
+      "status": "Status",
+      "location": "Location",
+      "files": "Attached Files",
+      "metadata": "Metadata",
+      "blockchain": "Blockchain Info",
+      "ipfs": "IPFS Hash",
+      "close": "Close"
+    },
+    "status": {
+      "reported": "Reported",
+      "verified": "Verified",
+      "resolved": "Resolved",
+      "false_alarm": "False Alarm"
+    }
+  },
+  "analytics": {
+    "title": "Analytics Dashboard",
+    "overview": {
+      "title": "Overview",
+      "totalIncidents": "Total Incidents",
+      "todayIncidents": "Today's Incidents",
+      "weekIncidents": "This Week",
+      "monthIncidents": "This Month"
+    },
+    "charts": {
+      "severityDistribution": "Severity Distribution",
+      "categoryBreakdown": "Category Breakdown",
+      "timeSeriesTitle": "Incidents Over Time",
+      "topCategories": "Top Categories",
+      "severityTrends": "Severity Trends",
+      "hourlyDistribution": "Hourly Distribution"
+    },
+    "periods": {
+      "today": "Today",
+      "week": "This Week",
+      "month": "This Month",
+      "all": "All Time"
+    }
+  },
+  "language": {
+    "selector": {
+      "title": "Language",
+      "change": "Change Language",
+      "auto": "Auto-detect",
+      "manual": "Manual Selection"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "refresh": "Refresh",
+    "retry": "Retry",
+    "upload": "Upload",
+    "download": "Download",
+    "share": "Share",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK",
+    "required": "Required",
+    "optional": "Optional",
+    "selectFile": "Select File",
+    "dragDrop": "Drag and drop files here",
+    "or": "or",
+    "and": "and",
+    "of": "of",
+    "in": "in",
+    "at": "at",
+    "on": "on",
+    "by": "by",
+    "from": "from",
+    "to": "to"
+  },
+  "errors": {
+    "generic": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "validation": "Please check your input and try again.",
+    "permission": "Permission denied.",
+    "notFound": "Not found.",
+    "unauthorized": "Unauthorized access.",
+    "serverError": "Server error. Please try again later.",
+    "timeout": "Request timed out. Please try again.",
+    "fileSize": "File size exceeds the maximum limit.",
+    "fileType": "File type not supported.",
+    "location": "Unable to access location services.",
+    "wallet": "Wallet connection failed.",
+    "blockchain": "Blockchain transaction failed.",
+    "ipfs": "IPFS upload failed."
+  },
+  "time": {
+    "now": "now",
+    "minuteAgo": "1 minute ago",
+    "minutesAgo": "{{count}} minutes ago",
+    "hourAgo": "1 hour ago",
+    "hoursAgo": "{{count}} hours ago",
+    "dayAgo": "1 day ago",
+    "daysAgo": "{{count}} days ago",
+    "weekAgo": "1 week ago",
+    "weeksAgo": "{{count}} weeks ago",
+    "monthAgo": "1 month ago",
+    "monthsAgo": "{{count}} months ago",
+    "yearAgo": "1 year ago",
+    "yearsAgo": "{{count}} years ago"
+  }
+}

@@ -1,18 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { Navigation } from '../components/Navigation';
 import styles from './landing.module.css';
 
 export default function LandingPage() {
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1 className={styles.logo}>Baxela</h1>
-        <nav className={styles.nav}>
-          <Link href="/report" className={styles.navLink}>Report an Incident</Link>
-          <Link href="/dashboard" className={styles.navLink}>View Dashboard</Link>
-        </nav>
-      </header>
+      <Navigation className={styles.header} />
 
       <main className={styles.main}>
         <section className={styles.hero}>
@@ -55,6 +51,10 @@ export default function LandingPage() {
             <div className={styles.feature}>
               <h4 className={styles.featureTitle}>Map Transparency</h4>
               <p>A real-time map provides a clear and accessible overview of all reported incidents.</p>
+            </div>
+            <div className={styles.feature}>
+              <h4 className={styles.featureTitle}>Base Account Integration</h4>
+              <p>Seamless Web3 experience with Base Account authentication and sponsored transactions on Base.</p>
             </div>
           </div>
         </section>

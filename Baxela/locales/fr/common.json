@@ -1,0 +1,237 @@
+{
+  "app": {
+    "title": "Rapporteur d'Incidents",
+    "description": "Signaler et suivre les incidents dans votre région"
+  },
+  "navigation": {
+    "mapView": "Vue Carte",
+    "analytics": "Tableau de Bord Analytique"
+  },
+  "wallet": {
+    "connect": "Connecter le Portefeuille",
+    "connecting": "Connexion...",
+    "connected": "Connecté",
+    "disconnect": "Déconnecter",
+    "address": "Adresse"
+  },
+  "auth": {
+    "title": "Se connecter avec Base Account",
+    "description": "Connectez votre Base Account pour accéder à toutes les fonctionnalités et profiter d'une expérience fluide.",
+    "connect": "Connecter Base Account",
+    "connecting": "Connexion...",
+    "connected": "Connecté à Base Account",
+    "disconnect": "Déconnecter",
+    "disconnected": "Déconnecté de Base Account",
+    "success": "Authentification réussie avec Base Account !",
+    "error": "Échec de l'authentification",
+    "errorPrefix": "Erreur :",
+    "allFeaturesEnabled": "Toutes les fonctionnalités sont maintenant disponibles !",
+    "benefits": {
+      "title": "Avantages de Base Account",
+      "gasless": "Transactions sans frais de gaz avec intégration paymaster",
+      "security": "Sécurité renforcée avec authentification par clé de passe",
+      "features": "Accès à toutes les fonctionnalités premium",
+      "crossApp": "Portabilité inter-applications et expérience fluide",
+      "fast": "Transactions rapides et peu coûteuses sur Base L2"
+    }
+  },
+  "location": {
+    "permission": {
+      "title": "Accès à la Localisation Requis",
+      "description": "Cette application a besoin d'accéder à votre localisation pour signaler précisément les incidents et afficher les rapports à proximité.",
+      "request": "Activer l'Accès à la Localisation",
+      "granted": "Accès à la localisation accordé",
+      "denied": "Accès à la localisation refusé",
+      "unavailable": "Services de localisation indisponibles",
+      "timeout": "Délai d'attente de localisation dépassé",
+      "error": "Erreur d'accès à la localisation",
+      "instructions": {
+        "title": "Comment activer l'accès à la localisation :",
+        "chrome": "Cliquez sur l'icône de localisation dans la barre d'adresse et sélectionnez 'Autoriser'",
+        "firefox": "Cliquez sur 'Partager la Localisation' lorsque demandé, ou vérifiez l'icône du bouclier",
+        "safari": "Allez dans Safari > Préférences > Sites Web > Services de Localisation",
+        "edge": "Cliquez sur l'icône de localisation dans la barre d'adresse et sélectionnez 'Autoriser'"
+      }
+    },
+    "current": "Localisation Actuelle",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "accuracy": "Précision"
+  },
+  "incident": {
+    "report": {
+      "title": "Signaler un Nouvel Incident",
+      "form": {
+        "title": "Titre de l'Incident",
+        "titlePlaceholder": "Description brève de l'incident",
+        "description": "Description",
+        "descriptionPlaceholder": "Description détaillée de ce qui s'est passé",
+        "category": "Catégorie",
+        "severity": "Gravité",
+        "files": "Télécharger des Fichiers",
+        "filesHelp": "Téléchargez des images, vidéos ou documents (max 50MB chacun)",
+        "submit": "Soumettre le Rapport",
+        "submitting": "Soumission...",
+        "success": "Incident signalé avec succès !",
+        "error": "Échec de la soumission du rapport d'incident"
+      },
+      "categories": {
+        "accident": "Accident",
+        "crime": "Crime",
+        "fire": "Incendie",
+        "medical": "Urgence Médicale",
+        "natural_disaster": "Catastrophe Naturelle",
+        "infrastructure": "Infrastructure",
+        "environmental": "Environnemental",
+        "other": "Autre"
+      },
+      "severities": {
+        "low": "Faible",
+        "medium": "Moyen",
+        "high": "Élevé",
+        "critical": "Critique"
+      }
+    },
+    "map": {
+      "title": "Carte des Incidents",
+      "loading": "Chargement des incidents...",
+      "showingIncidents": "Affichage de {{count}} incident signalé",
+      "showingIncidents_plural": "Affichage de {{count}} incidents signalés",
+      "legend": {
+        "title": "Légende",
+        "severity": "Niveaux de Gravité",
+        "categories": "Catégories",
+        "userLocation": "Votre Localisation"
+      },
+      "popup": {
+        "reportedBy": "Signalé par",
+        "reportedAt": "Signalé le",
+        "category": "Catégorie",
+        "severity": "Gravité",
+        "description": "Description",
+        "viewDetails": "Voir les Détails"
+      }
+    },
+    "details": {
+      "title": "Détails de l'Incident",
+      "id": "ID de l'Incident",
+      "status": "Statut",
+      "location": "Localisation",
+      "files": "Fichiers Joints",
+      "metadata": "Métadonnées",
+      "blockchain": "Info Blockchain",
+      "ipfs": "Hash IPFS",
+      "close": "Fermer"
+    },
+    "status": {
+      "reported": "Signalé",
+      "verified": "Vérifié",
+      "resolved": "Résolu",
+      "false_alarm": "Fausse Alerte"
+    }
+  },
+  "analytics": {
+    "title": "Tableau de Bord Analytique",
+    "overview": {
+      "title": "Aperçu",
+      "totalIncidents": "Total des Incidents",
+      "todayIncidents": "Incidents d'Aujourd'hui",
+      "weekIncidents": "Cette Semaine",
+      "monthIncidents": "Ce Mois"
+    },
+    "charts": {
+      "severityDistribution": "Distribution de Gravité",
+      "categoryBreakdown": "Répartition par Catégorie",
+      "timeSeriesTitle": "Incidents au Fil du Temps",
+      "topCategories": "Principales Catégories",
+      "severityTrends": "Tendances de Gravité",
+      "hourlyDistribution": "Distribution Horaire"
+    },
+    "periods": {
+      "today": "Aujourd'hui",
+      "week": "Cette Semaine",
+      "month": "Ce Mois",
+      "all": "Tout le Temps"
+    }
+  },
+  "language": {
+    "selector": {
+      "title": "Langue",
+      "change": "Changer de Langue",
+      "auto": "Détection Automatique",
+      "manual": "Sélection Manuelle"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "refresh": "Actualiser",
+    "retry": "Réessayer",
+    "upload": "Télécharger",
+    "download": "Télécharger",
+    "share": "Partager",
+    "copy": "Copier",
+    "copied": "Copié !",
+    "yes": "Oui",
+    "no": "Non",
+    "ok": "OK",
+    "required": "Requis",
+    "optional": "Optionnel",
+    "selectFile": "Sélectionner un Fichier",
+    "dragDrop": "Glissez et déposez les fichiers ici",
+    "or": "ou",
+    "and": "et",
+    "of": "de",
+    "in": "dans",
+    "at": "à",
+    "on": "sur",
+    "by": "par",
+    "from": "de",
+    "to": "à"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "validation": "Veuillez vérifier votre saisie et réessayer.",
+    "permission": "Permission refusée.",
+    "notFound": "Non trouvé.",
+    "unauthorized": "Accès non autorisé.",
+    "serverError": "Erreur serveur. Veuillez réessayer plus tard.",
+    "timeout": "Délai d'attente dépassé. Veuillez réessayer.",
+    "fileSize": "La taille du fichier dépasse la limite maximale.",
+    "fileType": "Type de fichier non pris en charge.",
+    "location": "Impossible d'accéder aux services de localisation.",
+    "wallet": "Échec de la connexion du portefeuille.",
+    "blockchain": "Échec de la transaction blockchain.",
+    "ipfs": "Échec du téléchargement IPFS."
+  },
+  "time": {
+    "now": "maintenant",
+    "minuteAgo": "il y a 1 minute",
+    "minutesAgo": "il y a {{count}} minutes",
+    "hourAgo": "il y a 1 heure",
+    "hoursAgo": "il y a {{count}} heures",
+    "dayAgo": "il y a 1 jour",
+    "daysAgo": "il y a {{count}} jours",
+    "weekAgo": "il y a 1 semaine",
+    "weeksAgo": "il y a {{count}} semaines",
+    "monthAgo": "il y a 1 mois",
+    "monthsAgo": "il y a {{count}} mois",
+    "yearAgo": "il y a 1 an",
+    "yearsAgo": "il y a {{count}} ans"
+  }
+}

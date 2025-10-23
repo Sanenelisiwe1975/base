@@ -51,7 +51,7 @@ By using **blockchain transparency** and **community verification**, it ensures 
 | Smart Contracts  | Solidity                                               |
 | Storage          | **IPFS / Arweave** for media                           |
 | Identity         | **Lens / Ceramic / Soulbound Tokens (SBTs)**           |
-| Frontend         | Next.js + TailwindCSS + Wagmi + WalletConnect          |
+| Frontend         | Next.js + TailwindCSS + Base Account SDK               |
 | Backend          | Node.js + GraphQL Indexer                              |
 | AI Tools         | Deepfake detection (Replicate API), NLP classification |
 | GPS Verification | H3 spatial hashing / GeoDID proofs                     |
@@ -75,7 +75,7 @@ By using **blockchain transparency** and **community verification**, it ensures 
 
 * Node.js v18+
 * npm / yarn
-* MetaMask or WalletConnect-enabled wallet
+* Base Account for authentication
 * Base testnet RPC endpoint
 
 ### Steps

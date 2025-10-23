@@ -1,0 +1,240 @@
+{
+  "app": {
+    "title": "Vorfallmelder",
+    "description": "Vorfälle in Ihrer Umgebung melden und verfolgen"
+  },
+  "navigation": {
+    "mapView": "Kartenansicht",
+    "analytics": "Analyse-Dashboard"
+  },
+  "wallet": {
+    "connect": "Wallet Verbinden",
+    "connecting": "Verbinde...",
+    "connected": "Verbunden",
+    "disconnect": "Trennen",
+    "address": "Adresse"
+  },
+  "auth": {
+    "title": "Mit Base Account anmelden",
+    "description": "Verbinden Sie Ihr Base Account, um auf alle Funktionen zuzugreifen und eine nahtlose Erfahrung zu genießen.",
+    "connect": "Base Account Verbinden",
+    "connecting": "Verbinde...",
+    "connected": "Mit Base Account verbunden",
+    "disconnect": "Trennen",
+    "disconnected": "Von Base Account getrennt",
+    "success": "Erfolgreich mit Base Account authentifiziert!",
+    "error": "Authentifizierung fehlgeschlagen",
+    "errorPrefix": "Fehler:",
+    "allFeaturesEnabled": "Alle Funktionen sind jetzt verfügbar!",
+    "benefits": {
+      "title": "Base Account Vorteile",
+      "gasless": "Gaslose Transaktionen mit Paymaster-Integration",
+      "security": "Verbesserte Sicherheit mit Passkey-Authentifizierung",
+      "features": "Zugang zu allen Premium-Funktionen",
+      "crossApp": "App-übergreifende Portabilität und nahtlose Erfahrung",
+      "fast": "Schnelle und kostengünstige Transaktionen auf Base L2"
+    }
+  },
+  "location": {
+    "permission": {
+      "title": "Standortzugriff Erforderlich",
+      "description": "Diese App benötigt Zugriff auf Ihren Standort, um Vorfälle genau zu melden und nahegelegene Berichte anzuzeigen.",
+      "request": "Standortzugriff Aktivieren",
+      "granted": "Standortzugriff gewährt",
+      "denied": "Standortzugriff verweigert",
+      "unavailable": "Standortdienste nicht verfügbar",
+      "timeout": "Standortanfrage-Timeout",
+      "error": "Fehler beim Zugriff auf Standort",
+      "instructions": {
+        "title": "So aktivieren Sie den Standortzugriff:",
+        "chrome": "Klicken Sie auf das Standortsymbol in der Adressleiste und wählen Sie 'Zulassen'",
+        "firefox": "Klicken Sie auf 'Standort Teilen' wenn aufgefordert, oder überprüfen Sie das Schild-Symbol",
+        "safari": "Gehen Sie zu Safari > Einstellungen > Websites > Standortdienste",
+        "edge": "Klicken Sie auf das Standortsymbol in der Adressleiste und wählen Sie 'Zulassen'"
+      }
+    },
+    "current": "Aktueller Standort",
+    "latitude": "Breitengrad",
+    "longitude": "Längengrad",
+    "accuracy": "Genauigkeit"
+  },
+  "incident": {
+    "report": {
+      "title": "Neuen Vorfall Melden",
+      "form": {
+        "title": "Vorfall-Titel",
+        "titlePlaceholder": "Kurze Beschreibung des Vorfalls",
+        "description": "Beschreibung",
+        "descriptionPlaceholder": "Detaillierte Beschreibung dessen, was passiert ist",
+        "category": "Kategorie",
+        "severity": "Schweregrad",
+        "files": "Dateien Hochladen",
+        "filesHelp": "Bilder, Videos oder Dokumente hochladen (max. 50MB je Datei)",
+        "submit": "Bericht Senden",
+        "submitting": "Sende...",
+        "success": "Vorfall erfolgreich gemeldet!",
+        "error": "Fehler beim Senden des Vorfallberichts"
+      },
+      "categories": {
+        "accident": "Unfall",
+        "crime": "Verbrechen",
+        "fire": "Feuer",
+        "medical": "Medizinischer Notfall",
+        "natural_disaster": "Naturkatastrophe",
+        "infrastructure": "Infrastruktur",
+        "environmental": "Umwelt",
+        "other": "Andere"
+      },
+      "severities": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch",
+        "critical": "Kritisch"
+      }
+    },
+    "map": {
+      "title": "Live-Vorfallkarte",
+      "loading": "Vorfälle werden geladen...",
+      "showingIncidents": "{{count}} gemeldeten Vorfall anzeigen",
+      "showingIncidents_plural": "{{count}} gemeldete Vorfälle anzeigen",
+      "legend": {
+        "title": "Legende",
+        "high": "Hohe Schwere",
+        "medium": "Mittlere Schwere",
+        "low": "Geringe Schwere",
+        "severity": "Schweregrade",
+        "categories": "Kategorien",
+        "userLocation": "Ihr Standort"
+      },
+      "popup": {
+        "reportedBy": "Gemeldet von",
+        "reportedAt": "Gemeldet am",
+        "category": "Kategorie",
+        "severity": "Schweregrad",
+        "description": "Beschreibung",
+        "viewDetails": "Details Anzeigen"
+      }
+    },
+    "details": {
+      "title": "Vorfall-Details",
+      "id": "Vorfall-ID",
+      "status": "Status",
+      "location": "Standort",
+      "files": "Angehängte Dateien",
+      "metadata": "Metadaten",
+      "blockchain": "Blockchain-Info",
+      "ipfs": "IPFS-Hash",
+      "close": "Schließen"
+    },
+    "status": {
+      "reported": "Gemeldet",
+      "verified": "Verifiziert",
+      "resolved": "Gelöst",
+      "false_alarm": "Fehlalarm"
+    }
+  },
+  "analytics": {
+    "title": "Analyse-Dashboard",
+    "overview": {
+      "title": "Übersicht",
+      "totalIncidents": "Gesamte Vorfälle",
+      "todayIncidents": "Heutige Vorfälle",
+      "weekIncidents": "Diese Woche",
+      "monthIncidents": "Dieser Monat"
+    },
+    "charts": {
+      "severityDistribution": "Schweregrad-Verteilung",
+      "categoryBreakdown": "Kategorie-Aufschlüsselung",
+      "timeSeriesTitle": "Vorfälle im Zeitverlauf",
+      "topCategories": "Top-Kategorien",
+      "severityTrends": "Schweregrad-Trends",
+      "hourlyDistribution": "Stündliche Verteilung"
+    },
+    "periods": {
+      "today": "Heute",
+      "week": "Diese Woche",
+      "month": "Dieser Monat",
+      "all": "Alle Zeit"
+    }
+  },
+  "language": {
+    "selector": {
+      "title": "Sprache",
+      "change": "Sprache Ändern",
+      "auto": "Automatisch Erkennen",
+      "manual": "Manuelle Auswahl"
+    }
+  },
+  "common": {
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "view": "Anzeigen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "search": "Suchen",
+    "filter": "Filtern",
+    "sort": "Sortieren",
+    "refresh": "Aktualisieren",
+    "retry": "Wiederholen",
+    "upload": "Hochladen",
+    "download": "Herunterladen",
+    "share": "Teilen",
+    "copy": "Kopieren",
+    "copied": "Kopiert!",
+    "yes": "Ja",
+    "no": "Nein",
+    "ok": "OK",
+    "required": "Erforderlich",
+    "optional": "Optional",
+    "selectFile": "Datei Auswählen",
+    "dragDrop": "Dateien hier hineinziehen",
+    "or": "oder",
+    "and": "und",
+    "of": "von",
+    "in": "in",
+    "at": "bei",
+    "on": "auf",
+    "by": "von",
+    "from": "von",
+    "to": "zu"
+  },
+  "errors": {
+    "generic": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "network": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
+    "validation": "Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.",
+    "permission": "Berechtigung verweigert.",
+    "notFound": "Nicht gefunden.",
+    "unauthorized": "Unbefugter Zugriff.",
+    "serverError": "Serverfehler. Bitte versuchen Sie es später erneut.",
+    "timeout": "Anfrage-Timeout. Bitte versuchen Sie es erneut.",
+    "fileSize": "Dateigröße überschreitet das maximale Limit.",
+    "fileType": "Dateityp nicht unterstützt.",
+    "location": "Zugriff auf Standortdienste nicht möglich.",
+    "wallet": "Wallet-Verbindung fehlgeschlagen.",
+    "blockchain": "Blockchain-Transaktion fehlgeschlagen.",
+    "ipfs": "IPFS-Upload fehlgeschlagen."
+  },
+  "time": {
+    "now": "jetzt",
+    "minuteAgo": "vor 1 Minute",
+    "minutesAgo": "vor {{count}} Minuten",
+    "hourAgo": "vor 1 Stunde",
+    "hoursAgo": "vor {{count}} Stunden",
+    "dayAgo": "vor 1 Tag",
+    "daysAgo": "vor {{count}} Tagen",
+    "weekAgo": "vor 1 Woche",
+    "weeksAgo": "vor {{count}} Wochen",
+    "monthAgo": "vor 1 Monat",
+    "monthsAgo": "vor {{count}} Monaten",
+    "yearAgo": "vor 1 Jahr",
+    "yearsAgo": "vor {{count}} Jahren"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "app": {
+    "title": "Reportador de Incidentes",
+    "description": "Reporta y rastrea incidentes en tu área"
+  },
+  "navigation": {
+    "mapView": "Vista del Mapa",
+    "analytics": "Panel de Análisis"
+  },
+  "wallet": {
+    "connect": "Conectar Billetera",
+    "connecting": "Conectando...",
+    "connected": "Conectado",
+    "disconnect": "Desconectar",
+    "address": "Dirección"
+  },
+  "auth": {
+    "title": "Iniciar sesión con Base Account",
+    "description": "Conecta tu Base Account para acceder a todas las funciones y disfrutar de una experiencia perfecta.",
+    "connect": "Conectar Base Account",
+    "connecting": "Conectando...",
+    "connected": "Conectado a Base Account",
+    "disconnect": "Desconectar",
+    "disconnected": "Desconectado de Base Account",
+    "success": "¡Autenticación exitosa con Base Account!",
+    "error": "Error de autenticación",
+    "errorPrefix": "Error:",
+    "allFeaturesEnabled": "¡Todas las funciones están ahora disponibles!",
+    "benefits": {
+      "title": "Beneficios de Base Account",
+      "gasless": "Transacciones sin gas con integración de paymaster",
+      "security": "Seguridad mejorada con autenticación de passkey",
+      "features": "Acceso a todas las funciones premium",
+      "crossApp": "Portabilidad entre aplicaciones y experiencia perfecta",
+      "fast": "Transacciones rápidas y de bajo costo en Base L2"
+    }
+  },
+  "location": {
+    "permission": {
+      "title": "Acceso a Ubicación Requerido",
+      "description": "Esta aplicación necesita acceso a tu ubicación para reportar incidentes con precisión y mostrar reportes cercanos.",
+      "request": "Habilitar Acceso a Ubicación",
+      "granted": "Acceso a ubicación concedido",
+      "denied": "Acceso a ubicación denegado",
+      "unavailable": "Servicios de ubicación no disponibles",
+      "timeout": "Tiempo de espera de ubicación agotado",
+      "error": "Error al acceder a la ubicación",
+      "instructions": {
+        "title": "Cómo habilitar el acceso a la ubicación:",
+        "chrome": "Haz clic en el ícono de ubicación en la barra de direcciones y selecciona 'Permitir'",
+        "firefox": "Haz clic en 'Compartir Ubicación' cuando se solicite, o verifica el ícono del escudo",
+        "safari": "Ve a Safari > Preferencias > Sitios Web > Servicios de Ubicación",
+        "edge": "Haz clic en el ícono de ubicación en la barra de direcciones y selecciona 'Permitir'"
+      }
+    },
+    "current": "Ubicación Actual",
+    "latitude": "Latitud",
+    "longitude": "Longitud",
+    "accuracy": "Precisión"
+  },
+  "incident": {
+    "report": {
+      "title": "Reportar Nuevo Incidente",
+      "form": {
+        "title": "Título del Incidente",
+        "titlePlaceholder": "Descripción breve del incidente",
+        "description": "Descripción",
+        "descriptionPlaceholder": "Descripción detallada de lo que pasó",
+        "category": "Categoría",
+        "severity": "Severidad",
+        "files": "Subir Archivos",
+        "filesHelp": "Sube imágenes, videos o documentos (máx. 50MB cada uno)",
+        "submit": "Enviar Reporte",
+        "submitting": "Enviando...",
+        "success": "¡Incidente reportado exitosamente!",
+        "error": "Error al enviar el reporte del incidente"
+      },
+      "categories": {
+        "accident": "Accidente",
+        "crime": "Crimen",
+        "fire": "Incendio",
+        "medical": "Emergencia Médica",
+        "natural_disaster": "Desastre Natural",
+        "infrastructure": "Infraestructura",
+        "environmental": "Ambiental",
+        "other": "Otro"
+      },
+      "severities": {
+        "low": "Baja",
+        "medium": "Media",
+        "high": "Alta",
+        "critical": "Crítica"
+      }
+    },
+    "map": {
+      "title": "Mapa de Incidentes en Vivo",
+      "loading": "Cargando incidentes...",
+      "showingIncidents": "Mostrando {{count}} incidente reportado",
+      "showingIncidents_plural": "Mostrando {{count}} incidentes reportados",
+      "legend": {
+        "title": "Leyenda",
+        "high": "Severidad Alta",
+        "medium": "Severidad Media",
+        "low": "Severidad Baja"
+      },
+      "popup": {
+        "reportedBy": "Reportado por",
+        "reportedAt": "Reportado el",
+        "category": "Categoría",
+        "severity": "Severidad",
+        "description": "Descripción",
+        "viewDetails": "Ver Detalles"
+      }
+    },
+    "details": {
+      "title": "Detalles del Incidente",
+      "id": "ID del Incidente",
+      "status": "Estado",
+      "location": "Ubicación",
+      "files": "Archivos Adjuntos",
+      "metadata": "Metadatos",
+      "blockchain": "Info de Blockchain",
+      "ipfs": "Hash IPFS",
+      "close": "Cerrar"
+    },
+    "status": {
+      "reported": "Reportado",
+      "verified": "Verificado",
+      "resolved": "Resuelto",
+      "false_alarm": "Falsa Alarma"
+    }
+  },
+  "analytics": {
+    "title": "Panel de Análisis",
+    "overview": {
+      "title": "Resumen",
+      "totalIncidents": "Total de Incidentes",
+      "todayIncidents": "Incidentes de Hoy",
+      "weekIncidents": "Esta Semana",
+      "monthIncidents": "Este Mes"
+    },
+    "charts": {
+      "severityDistribution": "Distribución de Severidad",
+      "categoryBreakdown": "Desglose por Categoría",
+      "timeSeriesTitle": "Incidentes a lo Largo del Tiempo",
+      "topCategories": "Principales Categorías",
+      "severityTrends": "Tendencias de Severidad",
+      "hourlyDistribution": "Distribución por Hora"
+    },
+    "periods": {
+      "today": "Hoy",
+      "week": "Esta Semana",
+      "month": "Este Mes",
+      "all": "Todo el Tiempo"
+    }
+  },
+  "language": {
+    "selector": {
+      "title": "Idioma",
+      "change": "Cambiar Idioma",
+      "auto": "Detectar Automáticamente",
+      "manual": "Selección Manual"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "refresh": "Actualizar",
+    "retry": "Reintentar",
+    "upload": "Subir",
+    "download": "Descargar",
+    "share": "Compartir",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "yes": "Sí",
+    "no": "No",
+    "ok": "OK",
+    "required": "Requerido",
+    "optional": "Opcional",
+    "selectFile": "Seleccionar Archivo",
+    "dragDrop": "Arrastra y suelta archivos aquí",
+    "or": "o",
+    "and": "y",
+    "of": "de",
+    "in": "en",
+    "at": "en",
+    "on": "en",
+    "by": "por",
+    "from": "desde",
+    "to": "a"
+  },
+  "errors": {
+    "generic": "Ocurrió un error. Por favor intenta de nuevo.",
+    "network": "Error de red. Por favor verifica tu conexión.",
+    "validation": "Por favor verifica tu entrada e intenta de nuevo.",
+    "permission": "Permiso denegado.",
+    "notFound": "No encontrado.",
+    "unauthorized": "Acceso no autorizado.",
+    "serverError": "Error del servidor. Por favor intenta más tarde.",
+    "timeout": "Tiempo de espera agotado. Por favor intenta de nuevo.",
+    "fileSize": "El tamaño del archivo excede el límite máximo.",
+    "fileType": "Tipo de archivo no soportado.",
+    "location": "No se puede acceder a los servicios de ubicación.",
+    "wallet": "Falló la conexión de la billetera.",
+    "blockchain": "Falló la transacción de blockchain.",
+    "ipfs": "Falló la subida a IPFS."
+  },
+  "time": {
+    "now": "ahora",
+    "minuteAgo": "hace 1 minuto",
+    "minutesAgo": "hace {{count}} minutos",
+    "hourAgo": "hace 1 hora",
+    "hoursAgo": "hace {{count}} horas",
+    "dayAgo": "hace 1 día",
+    "daysAgo": "hace {{count}} días",
+    "weekAgo": "hace 1 semana",
+    "weeksAgo": "hace {{count}} semanas",
+    "monthAgo": "hace 1 mes",
+    "monthsAgo": "hace {{count}} meses",
+    "yearAgo": "hace 1 año",
+    "yearsAgo": "hace {{count}} años"
+  }
+}

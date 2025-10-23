@@ -48,6 +48,11 @@ const Map = ({ incidents }: { incidents: Incident[] }) => {
 
   useEffect(() => {
     const geocodeIncident = async (incident: Incident): Promise<Incident | null> => {
+      // First check if lat/lng are already provided in the incident data
+      if (incident.lat !== null && incident.lng !== null && incident.lat !== undefined && incident.lng !== undefined) {
+        return { ...incident, lat: incident.lat, lng: incident.lng };
+      }
+
       // Check if location is already GPS coordinates
       const gpsMatch = incident.location.match(/^(-?\d+\.?\d*),\s*(-?\d+\.?\d*)$/);
       if (gpsMatch) {

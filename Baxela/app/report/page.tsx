@@ -205,14 +205,50 @@ export default function ReportPage() {
 
             <div className={styles.formGroup}>
               <label htmlFor="location">Location (City or Address)</label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                required
-              />
+              <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleChange}
+                  required
+                  style={{ flex: 1 }}
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                          const { latitude, longitude } = position.coords;
+                          setFormData(prev => ({
+                            ...prev,
+                            location: `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`
+                          }));
+                        },
+                        (error) => {
+                          console.error('Error getting location:', error);
+                          alert('Unable to get your location. Please enter it manually.');
+                        }
+                      );
+                    } else {
+                      alert('Geolocation is not supported by this browser.');
+                    }
+                  }}
+                  style={{
+                    padding: '8px 12px',
+                    backgroundColor: '#007bff',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontSize: '12px'
+                  }}
+                >
+                  📍 Use Current Location
+                </button>
+              </div>
             </div>
 
             <button type="submit" className={styles.button} disabled={isSubmitting}>
